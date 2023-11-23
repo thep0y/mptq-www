@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   SafeArea,
   List,
@@ -7,40 +7,44 @@ import {
   Ellipsis,
   Toast,
   NoticeBar,
-} from "antd-mobile";
-import { RightOutline } from "antd-mobile-icons";
-import { useNavigate } from "react-router-dom";
-import { api } from "~/utils";
-import "./index.scss";
+} from 'antd-mobile'
+import { RightOutline } from 'antd-mobile-icons'
+import { useNavigate } from 'react-router-dom'
+import { api, isPC } from '~/utils'
+import './index.scss'
 
 const tagNames: Record<keyof Tag, string> = {
-  info: "primary",
-  normal: "success",
-  warning: "warning",
-  error: "danger",
-};
+  info: 'primary',
+  normal: 'success',
+  warning: 'warning',
+  error: 'danger',
+}
 
 function App() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [list, setList] = useState<ListItem[]>([]);
+  const [list, setList] = useState<ListItem[]>([])
 
   useEffect(() => {
-    api<ListItem[]>("/list").then((data) => {
-      setList(data);
-    });
-  }, []);
+    api<ListItem[]>('/list').then((data) => {
+      setList(data)
+    })
+  }, [])
 
   const onHeaderClick = (path: string) => {
-    navigate("/scale/" + path);
-  };
+    navigate('/scale/' + path)
+  }
 
   const onContentClick = () => {
-    Toast.show("点击标题可进入测试");
-  };
+    Toast.show('点击标题可进入测试')
+  }
+
+  if (isPC()) {
+    Toast.show('本网站专为手机设计，在 PC 浏览器中效果可能不好。')
+  }
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: 'relative' }}>
       <SafeArea position="top" />
 
       <List className="list">
@@ -82,7 +86,7 @@ function App() {
       </List>
       <SafeArea position="bottom" />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

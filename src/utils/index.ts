@@ -10,3 +10,5 @@ export const isType = <T extends object>(
 ): obj is T => {
   return key in obj
 }
+
+export const isPC = () => !/Mobi|Android|iPhone/i.test(navigator.userAgent)
