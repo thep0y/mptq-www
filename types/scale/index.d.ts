@@ -17,6 +17,7 @@ type Path =
   | 'y_bocs'
   | 'ept'
   | '16pf'
+  | 'neo_pi_r'
 
 type ValueTypes = {
   scl90: Scl90Value
@@ -31,6 +32,8 @@ type InferValue<P extends Path> = P extends 'scl90'
   ? EptValue
   : P extends 'epq_rsc'
   ? EpqRscValue
+  : P extends 'neo_pi_r'
+  ? NEOPiRValue
   : number
 
 type InferResult<P extends Path> = P extends 'scl90'
@@ -43,6 +46,8 @@ type InferResult<P extends Path> = P extends 'scl90'
   ? EptResult
   : P extends '16pf'
   ? SPFResult
+  : P extends 'neo_pi_r'
+  ? NEOPiRResult
   : number
 
 type InferInterpretation<P extends Path> = P extends 'scl90'
@@ -53,6 +58,8 @@ type InferInterpretation<P extends Path> = P extends 'scl90'
   ? EptInterpretation
   : P extends '16pf'
   ? SPFInterpretation
+  : P extends 'neo_pi_r'
+  ? NEOPiRInterpretation
   : CommonInterpretation
 
 type InferQuestion<P extends Path> = P extends 'scl90'
@@ -63,6 +70,8 @@ type InferQuestion<P extends Path> = P extends 'scl90'
   ? EptQuestion
   : P extends '16pf'
   ? SPFQuestion
+  : P extends 'neo_pi_r'
+  ? NEOPiRQuestion
   : CommonQuestion
 
 type CalculateResult<P extends Path> = (
@@ -120,4 +129,18 @@ interface QuestionListItem {
 interface Characteristic {
   low: string[]
   high: string[]
+}
+
+type ComparisonOperator = 'L' | 'LE' | 'G' | 'GE'
+
+interface Comparison {
+  expression: string
+  operator: ComparisonOperator
+}
+
+type Gender = 'male' | 'female'
+
+interface ComparisonArg {
+  value: number
+  operator: ComparisonOperator
 }

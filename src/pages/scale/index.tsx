@@ -9,6 +9,7 @@ import {
   LazyEPTScale,
   LazyEptRscScale,
   LazyIdea,
+  LazyNeoPiRScale,
   LazySCL90Scale,
   LazyYBocsScale,
 } from '~/pages'
@@ -38,7 +39,9 @@ const Scale = () => {
 
   const [autoNext, setAutoNext] = useState(true)
 
-  const [renderScale, setRenderScale] = useState(false)
+  const [renderScale, setRenderScale] = useState(
+    import.meta.env.MODE === 'development',
+  )
 
   useEffect(() => {
     if (scale) return
@@ -121,6 +124,7 @@ const Scale = () => {
       case 'y_bocs':
       case 'ept':
       case 'epq_rsc':
+      case 'neo_pi_r':
         navigate('/result/' + path, {
           replace: true,
           state: {
@@ -244,6 +248,24 @@ const Scale = () => {
           />
         )
 
+      case 'neo_pi_r':
+        return (
+          <LazyNeoPiRScale
+            scale={
+              scale as Scale<
+                InferQuestion<typeof path>,
+                InferInterpretation<typeof path>
+              >
+            }
+            currentIndex={currentIndex}
+            values={values as InferValue<typeof path>[]}
+            setValues={setValues as SetStateAction<InferValue<typeof path>[]>}
+            setCalculateResult={
+              setCalculateResult as SetStateAction<CalculateResult<typeof path>>
+            }
+          />
+        )
+
       default:
         return (
           <LazyCommonScale
@@ -293,7 +315,7 @@ const Scale = () => {
               wait={5}
               content={instruction}
               onClose={() => setRenderScale(true)}
-              defaultShow
+              defaultShow={import.meta.env.MODE === 'production'}
             />
             {renderScale ? suspense(render()) : null}
             <Grid columns={12} gap={8} style={{ marginTop: 10 }}>

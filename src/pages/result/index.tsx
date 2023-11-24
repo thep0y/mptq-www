@@ -9,6 +9,7 @@ import {
   LazyYbocsResult,
   LazyEPTResult,
   LazyEpqRscResult,
+  LazyNeoPiRResult,
 } from '~/pages'
 import './index.scss'
 
@@ -39,6 +40,10 @@ const Result = () => {
 
     if (path === 'epq_rsc') {
       return suspense(<LazyEpqRscResult />)
+    }
+
+    if (path === 'neo_pi_r') {
+      return suspense(<LazyNeoPiRResult />)
     }
 
     return suspense(<LazyCommonResult />)

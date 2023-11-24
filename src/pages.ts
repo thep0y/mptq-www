@@ -46,6 +46,13 @@ export const LazyEptRscScale = lazy(
   () => import('~/pages/scale/items/epq-rsc/scale'),
 )
 
+export const LazyNeoPiRQuestion = lazy(
+  () => import('~/pages/scale/items/neo-pi-r/question'),
+)
+export const LazyNeoPiRScale = lazy(
+  () => import('~/pages/scale/items/neo-pi-r/scale'),
+)
+
 export const LazyScale = lazy(() => import('~/pages/scale/index'))
 
 export const LazyCircle = lazy(() => import('~/pages/result/components/circle'))
@@ -61,4 +68,7 @@ export const LazyYbocsResult = lazy(() => import('~/pages/result/y-bocs/index'))
 export const LazyEPTResult = lazy(() => import('~/pages/result/ept/index'))
 export const LazyEpqRscResult = lazy(
   () => import('~/pages/result/epq-rsc/index'),
+)
+export const LazyNeoPiRResult = lazy(
+  () => import('~/pages/result/neo-pi-r/index'),
 )
