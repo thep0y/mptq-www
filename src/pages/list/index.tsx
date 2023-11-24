@@ -48,41 +48,43 @@ function App() {
       <SafeArea position="top" />
 
       <List className="list">
-        {list.map((v) => (
-          <List.Item key={v.path} className="list__item">
-            <Card
-              title={v.name}
-              extra={<RightOutline />}
-              onHeaderClick={() => onHeaderClick(v.path)}
-            >
-              {v.warning ? (
-                <NoticeBar content={v.warning} wrap color="alert" />
-              ) : null}
+        {list.map((v) =>
+          !v.disabled ? (
+            <List.Item key={v.path} className="list__item">
+              <Card
+                title={v.name}
+                extra={<RightOutline />}
+                onHeaderClick={() => onHeaderClick(v.path)}
+              >
+                {v.warning ? (
+                  <NoticeBar content={v.warning} wrap color="alert" />
+                ) : null}
 
-              <Ellipsis
-                className="introduction"
-                direction="end"
-                rows={3}
-                content={v.introduction}
-                expandText="展开"
-                collapseText="收起"
-                onContentClick={onContentClick}
-              />
-              <div className="tags">
-                {Object.keys(v.tags).map(
-                  (k) =>
-                    (v.tags[k as keyof Tag] as string[] | undefined)?.map(
-                      (s, i) => (
-                        <Tag key={i} round color={tagNames[k as keyof Tag]}>
-                          {s}
-                        </Tag>
+                <Ellipsis
+                  className="introduction"
+                  direction="end"
+                  rows={3}
+                  content={v.introduction}
+                  expandText="展开"
+                  collapseText="收起"
+                  onContentClick={onContentClick}
+                />
+                <div className="tags">
+                  {Object.keys(v.tags).map(
+                    (k) =>
+                      (v.tags[k as keyof Tag] as string[] | undefined)?.map(
+                        (s, i) => (
+                          <Tag key={i} round color={tagNames[k as keyof Tag]}>
+                            {s}
+                          </Tag>
+                        ),
                       ),
-                    ),
-                )}
-              </div>
-            </Card>
-          </List.Item>
-        ))}
+                  )}
+                </div>
+              </Card>
+            </List.Item>
+          ) : null,
+        )}
       </List>
       <SafeArea position="bottom" />
     </div>
