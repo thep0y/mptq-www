@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Button, Collapse, Divider, NoticeBar, Popup } from 'antd-mobile'
 import GradientLine from '../components/gradient-line'
-import { generateLinearColors, generateColors, Color } from '~/utils'
+import { generateLinearColors, Color } from '~/utils'
 import Canvas from '@antv/f2-react'
 import { Chart, Axis, Area, Point, Line } from '@antv/f2'
 
@@ -12,20 +12,15 @@ export interface RadarChartProps {
   nice?: boolean
   tickCount?: number
   data: { item: string; value: number }[]
-  emphasize?: string[]
 }
 
 const yesBaseColor = new Color(129, 100, 32)
-const yesColors = generateColors(9, yesBaseColor)
-const noBaseColor = new Color(33, 73, 64)
-const noColors = generateColors(9, noBaseColor)
 
 const RadarChart = ({
   min = 0,
   max,
   nice = true,
   data,
-  emphasize,
   tickCount,
 }: RadarChartProps) => {
   return (

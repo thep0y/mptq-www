@@ -13,7 +13,7 @@ interface NEOPiRProps {
   setCalculateResult: SetStateAction<(values: NEOPiRValue[]) => NEOPiRResult>
 }
 
-const SPFQuestion = ({
+const NEOPiRScale = ({
   scale,
   currentIndex,
   values,
@@ -25,8 +25,6 @@ const SPFQuestion = ({
     import.meta.env.MODE === 'development' ? false : true,
   )
   const [gender, setGender] = useState<Gender | null>(null)
-
-  console.log(gender)
 
   const updateValues = (index: number, value: NEOPiRValue) => {
     setValues((prev) => {
@@ -139,4 +137,4 @@ const SPFQuestion = ({
   )
 }
 
-export default SPFQuestion
+export default NEOPiRScale

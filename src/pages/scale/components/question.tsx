@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { CheckList } from 'antd-mobile'
 import { CheckCircleFill } from 'antd-mobile-icons'
 import type { CheckListValue } from 'antd-mobile/es/components/check-list'
@@ -23,13 +22,6 @@ const Question = ({
   useIndex = true,
   prefix,
 }: QuestionProps) => {
-  const [value, setValue] = useState(selected === undefined ? [] : [selected])
-
-  useEffect(
-    () => setValue(selected === undefined ? [] : [selected]),
-    [selected],
-  )
-
   const onChange = (val: CheckListValue[]) => {
     // 禁止取消选择
     if (val.length === 0) return
@@ -51,8 +43,7 @@ const Question = ({
 
       <div>
         <CheckList
-          value={value}
-          // defaultValue={selected ? [selected] : []}
+          value={selected !== undefined ? [selected] : []}
           onChange={onChange}
           activeIcon={<CheckCircleFill />}
         >
