@@ -1,5 +1,7 @@
 import { lazy } from 'react'
 
+export const LazyFooter = lazy(() => import('~/components/footer'))
+
 export const LazyHome = lazy(() => import('~/pages/list/index'))
 export const LazyQuestion = lazy(
   () => import('~/pages/scale/components/question'),
