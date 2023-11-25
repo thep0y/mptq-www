@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { NavBar, Grid, Button, NoticeBar } from 'antd-mobile'
+import { NavBar, Grid, Button, NoticeBar, ErrorBlock } from 'antd-mobile'
 import suspense from '~/advance/suspense'
 import {
   Lazy16pfScale,
@@ -20,6 +20,7 @@ import Alert from '~/components/alert'
 const Scale = () => {
   const { path } = useParams() as { path: Path }
 
+  const [error, setError] = useState<HttpError | null>(null)
   const [scale, setScale] = useState<Scale<
     InferQuestion<typeof path>,
     InferInterpretation<typeof path>
@@ -49,6 +50,11 @@ const Scale = () => {
     api<Scale<InferQuestion<typeof path>, InferInterpretation<typeof path>>>(
       '/' + path,
     ).then((data) => {
+      if (data instanceof Error) {
+        setError({ title: '网络请求异常', description: '无法从服务器获取数据' })
+        return
+      }
+
       setScale(data)
       setCurrentIndex(0)
     })
@@ -111,12 +117,19 @@ const Scale = () => {
     })
   }, [scale, instruction.length])
 
+  if (error) {
+    return <ErrorBlock fullPage status="disconnected" {...error} />
+  }
+
   if (!scale || currentIndex === -1) {
     return null
   }
 
   const onSubmit = () => {
     const result = calculateResult!(values)
+
+    console.log(values)
+    console.log(result)
 
     switch (path) {
       case 'scl90':

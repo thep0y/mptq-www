@@ -26,10 +26,7 @@ const tagNames: Record<keyof Tag, string> = {
 const Index = () => {
   const navigate = useNavigate()
 
-  const [error, setError] = useState<{
-    title: string
-    description: string
-  } | null>(null)
+  const [error, setError] = useState<HttpError | null>(null)
   const [list, setList] = useState<ListItem[]>([])
 
   useEffect(() => {
