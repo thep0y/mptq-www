@@ -8,7 +8,7 @@ interface IdeaProps {
 
 const Idea = ({ content, hide }: IdeaProps) => {
   return (
-    <div className="container" style={{ minHeight: 'calc(100vh - 2rem)' }}>
+    <div className="container">
       <div
         style={{
           textAlign: 'center',

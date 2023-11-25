@@ -8,12 +8,19 @@ body {
   margin: 0;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .adm-nav-bar {
   background-color: #fff;
 }
 
 .container {
   padding: 1rem;
+  flex: 1;
 }
 
 .indent {

@@ -8,6 +8,7 @@ import {
   LazyCommonScale,
   LazyEPTScale,
   LazyEptRscScale,
+  LazyFooter,
   LazyIdea,
   LazyNeoPiRScale,
   LazySCL90Scale,
@@ -300,12 +301,19 @@ const Scale = () => {
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div
+      style={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+      }}
+    >
       <NavBar onBack={() => navigate('/', { replace: true })}>
         {scale.name}
       </NavBar>
 
-      <div className="container">
+      <div style={{ flex: 1 }}>
         {scale.idea ? (
           suspense(
             <LazyIdea
@@ -382,6 +390,7 @@ const Scale = () => {
           </>
         )}
       </div>
+      {suspense(<LazyFooter />)}
     </div>
   )
 }

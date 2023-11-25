@@ -10,6 +10,7 @@ import {
   LazyEPTResult,
   LazyEpqRscResult,
   LazyNeoPiRResult,
+  LazyFooter,
 } from '~/pages'
 import './index.scss'
 
@@ -50,7 +51,7 @@ const Result = () => {
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="main">
       <NavBar
         backArrow={<HomeOutlined />}
         onBack={() => navigate('/', { replace: true })}
@@ -66,6 +67,8 @@ const Result = () => {
       />
 
       {render()}
+
+      {suspense(<LazyFooter />)}
     </div>
   )
 }
