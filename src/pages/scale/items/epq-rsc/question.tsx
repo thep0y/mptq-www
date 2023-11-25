@@ -35,6 +35,7 @@ const EqpRscQuestion = ({
       selected={selected}
       handleChange={handleChange}
       options={options}
+      useIndex={false}
     />,
   )
 }
