@@ -40,7 +40,7 @@ const RadarChart = ({
           },
         }}
       >
-        <Axis field="item" />
+        <Axis field="item" style={{ label: { fontSize: 14 } }} />
 
         <Axis field="value" />
 
@@ -48,19 +48,7 @@ const RadarChart = ({
 
         <Area x="item" y="value" color={yesBaseColor.hex()} />
 
-        <Point
-          x="item"
-          y="value"
-          color={yesBaseColor.hex()}
-          // color={{
-          //   field: 'item',
-          //   callback: (v: string) => {
-          //     const color = yesColors[sorted.findIndex((i) => i.item === v)]
-          //
-          //     return color
-          //   },
-          // }}
-        />
+        <Point x="item" y="value" color={yesBaseColor.hex()} />
       </Chart>
     </Canvas>
   )
@@ -130,7 +118,7 @@ const Result = () => {
   const closeSub = () => setSubProps([])
 
   return (
-    <div>
+    <>
       <div
         id="chart"
         style={{ width: '100%', height: '20rem', position: 'relative' }}
@@ -147,60 +135,62 @@ const Result = () => {
         />
       </div>
 
-      <NoticeBar
-        wrap
-        color="alert"
-        content="不同的颜色不代表好坏程度，只是为了告诉您您的得分倾向于哪一侧。"
-      />
+      <div className="container">
+        <NoticeBar
+          wrap
+          color="alert"
+          content="不同的颜色不代表好坏程度，只是为了告诉您您的得分倾向于哪一侧。"
+        />
 
-      <Collapse>
-        {interpretation.dimensions.map((d) => {
-          const resultItem = result.dimensions[d.dimension]
+        <Collapse>
+          {interpretation.dimensions.map((d) => {
+            const resultItem = result.dimensions[d.dimension]
 
-          return (
-            <Collapse.Panel
-              key={d.dimension}
-              title={d.name + '(' + d.dimension + ')'}
-            >
-              <div className="indent" style={{ marginBottom: '1rem' }}>
-                {d.description}
-              </div>
-
-              <Divider>得分</Divider>
-
-              <GradientLine
-                min={1}
-                max={10}
-                value={resultItem.transformRule.value}
-                lowText={d.low}
-                highText={d.high}
-                colors={generateLinearColors(
-                  new Color(0, 100, 50),
-                  new Color(120, 100, 50),
-                  3,
-                )}
-              />
-
-              <Button
-                onClick={() => setSubProps(d.subdimension_interpretations)}
-                size="small"
-                color="primary"
-                fill="outline"
-                style={{ float: 'right' }}
+            return (
+              <Collapse.Panel
+                key={d.dimension}
+                title={d.name + '(' + d.dimension + ')'}
               >
-                查看子维度
-              </Button>
-            </Collapse.Panel>
-          )
-        })}
-      </Collapse>
+                <div className="indent" style={{ marginBottom: '1rem' }}>
+                  {d.description}
+                </div>
 
-      <SubdimensionInterpretation
-        close={closeSub}
-        subdimensionInterpretations={subProps}
-        subdimensionResult={result.subdimensions}
-      />
-    </div>
+                <Divider>得分</Divider>
+
+                <GradientLine
+                  min={1}
+                  max={10}
+                  value={resultItem.transformRule.value}
+                  lowText={d.low}
+                  highText={d.high}
+                  colors={generateLinearColors(
+                    new Color(0, 100, 50),
+                    new Color(120, 100, 50),
+                    3,
+                  )}
+                />
+
+                <Button
+                  onClick={() => setSubProps(d.subdimension_interpretations)}
+                  size="small"
+                  color="primary"
+                  fill="outline"
+                  style={{ float: 'right' }}
+                >
+                  查看子维度
+                </Button>
+              </Collapse.Panel>
+            )
+          })}
+        </Collapse>
+
+        <SubdimensionInterpretation
+          close={closeSub}
+          subdimensionInterpretations={subProps}
+          subdimensionResult={result.subdimensions}
+        />
+      </div>
+    </>
   )
 }
 
