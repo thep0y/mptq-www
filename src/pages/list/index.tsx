@@ -7,10 +7,13 @@ import {
   Ellipsis,
   Toast,
   NoticeBar,
+  ErrorBlock,
 } from 'antd-mobile'
 import { RightOutline } from 'antd-mobile-icons'
 import { useNavigate } from 'react-router-dom'
 import { api, isPC } from '~/utils'
+import suspense from '~/advance/suspense'
+import { LazyFooter } from '~/pages'
 import './index.scss'
 
 const tagNames: Record<keyof Tag, string> = {
@@ -20,16 +23,33 @@ const tagNames: Record<keyof Tag, string> = {
   error: 'danger',
 }
 
-function App() {
+const Index = () => {
   const navigate = useNavigate()
 
+  const [error, setError] = useState<{
+    title: string
+    description: string
+  } | null>(null)
   const [list, setList] = useState<ListItem[]>([])
 
   useEffect(() => {
-    api<ListItem[]>('/list').then((data) => {
+    const getList = async () => {
+      const data = await api<ListItem[]>('/list')
+
+      if (data instanceof Error) {
+        setError({ title: '网络请求异常', description: '无法从服务器获取数据' })
+        return
+      }
+
       setList(data)
-    })
+    }
+
+    getList()
   }, [])
+
+  if (error) {
+    return <ErrorBlock fullPage status="disconnected" {...error} />
+  }
 
   const onHeaderClick = (path: string) => {
     navigate('/scale/' + path)
@@ -86,9 +106,11 @@ function App() {
           ) : null,
         )}
       </List>
+
+      {suspense(<LazyFooter />)}
       <SafeArea position="bottom" />
     </div>
   )
 }
 
-export default App
+export default Index

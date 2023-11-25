@@ -1,8 +1,9 @@
-export const api = <T>(path: string): Promise<T> => {
-  return fetch('/api' + path).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.statusText)
-    }
-    return response.json() as Promise<T>
-  })
+export const api = async <T>(path: string): Promise<T | Error> => {
+  const response = await fetch('/api' + path)
+
+  if (!response.ok) {
+    return new Error(response.statusText)
+  }
+
+  return response.json() as Promise<T>
 }
