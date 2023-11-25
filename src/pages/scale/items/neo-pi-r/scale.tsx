@@ -117,7 +117,9 @@ const NEOPiRScale = ({
                 rules={[{ required: true }]}
               >
                 <Radio.Group onChange={(v) => setGender(v as keyof EpqRscNorm)}>
-                  <Radio value="male">男</Radio>
+                  <Radio value="male" style={{ marginRight: '1.5rem' }}>
+                    男
+                  </Radio>
 
                   <Radio value="female">女</Radio>
                 </Radio.Group>

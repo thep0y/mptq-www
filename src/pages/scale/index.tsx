@@ -333,10 +333,10 @@ const Scale = () => {
           <>
             <Alert
               title="测试需知"
-              wait={5}
+              wait={import.meta.env.MODE === 'production' ? 5 : 0}
               content={instruction}
               onClose={() => setRenderScale(true)}
-              defaultShow={import.meta.env.MODE === 'production'}
+              defaultShow={import.meta.env.MODE !== 'development'}
             />
             {renderScale ? suspense(render()) : null}
             <Grid columns={12} gap={8} style={{ marginTop: 10 }}>
