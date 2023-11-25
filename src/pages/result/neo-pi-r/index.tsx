@@ -2,57 +2,8 @@ import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Button, Collapse, Divider, NoticeBar, Popup } from 'antd-mobile'
 import GradientLine from '../components/gradient-line'
+import Radar from '../components/radar.tsx'
 import { generateLinearColors, Color } from '~/utils'
-import Canvas from '@antv/f2-react'
-import { Chart, Axis, Area, Point, Line } from '@antv/f2'
-
-export interface RadarChartProps {
-  min?: number
-  max: number
-  nice?: boolean
-  tickCount?: number
-  data: { item: string; value: number }[]
-}
-
-const yesBaseColor = new Color(129, 100, 32)
-
-const RadarChart = ({
-  min = 0,
-  max,
-  nice = true,
-  data,
-  tickCount,
-}: RadarChartProps) => {
-  return (
-    <Canvas pixelRatio={window.devicePixelRatio}>
-      <Chart
-        data={data}
-        coord={{
-          type: 'polar',
-          radius: 1,
-        }}
-        scale={{
-          value: {
-            min,
-            max,
-            nice,
-            tickCount,
-          },
-        }}
-      >
-        <Axis field="item" style={{ label: { fontSize: 14 } }} />
-
-        <Axis field="value" />
-
-        <Line x="item" y="value" color={yesBaseColor.hex()} />
-
-        <Area x="item" y="value" color={yesBaseColor.hex()} />
-
-        <Point x="item" y="value" color={yesBaseColor.hex()} />
-      </Chart>
-    </Canvas>
-  )
-}
 
 interface SubdimensionInterpretationProps {
   close: () => void
@@ -123,6 +74,7 @@ const Result = () => {
         id="chart"
         style={{ width: '100%', height: '20rem', position: 'relative' }}
       >
+        {/*
         <RadarChart
           min={1}
           max={10}
@@ -132,6 +84,24 @@ const Result = () => {
           }))}
           tickCount={6}
           nice={false}
+        />
+        */}
+
+        <Radar
+          data={interpretation.dimensions.map((d) => ({
+            item: d.name,
+            fields: {
+              value: result.dimensions[d.dimension].transformRule.value,
+            },
+          }))}
+          itemStyle={{
+            fontSize: 14,
+          }}
+          scaleOption={{
+            min: 1,
+            max: 10,
+            tickCount: 6,
+          }}
         />
       </div>
 
