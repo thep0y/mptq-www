@@ -155,7 +155,7 @@ const Result = () => {
           '本测试的目的是测试你的根源特质处于什么水平，不要将你的表面特质与本结果中对根源特质水平的描述进行比较。',
         ]}
         defaultShow={true}
-        wait={10}
+        wait={import.meta.env.MODE === 'production' ? 10 : 0}
       />
 
       <div style={{ width: '100%', height: '30rem' }}>

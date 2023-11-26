@@ -74,7 +74,7 @@ const Scl90Result = () => {
           '本测试仅适用于初步的症状筛选，存在一定的误差。如果您的测试结果中有某些因子为阳性，则需要选择对应症状的专用测试或去寻找心理医生进行进一步评估。',
         ]}
         defaultShow={true}
-        wait={5}
+        wait={import.meta.env.MODE === 'production' ? 5 : 0}
       />
 
       <div id="chart" style={{ width: '100%', height: 300 }}>
