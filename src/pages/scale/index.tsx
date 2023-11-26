@@ -338,55 +338,57 @@ const Scale = () => {
               onClose={() => setRenderScale(true)}
               defaultShow={import.meta.env.MODE !== 'development'}
             />
-            {renderScale ? suspense(render()) : null}
-            <Grid columns={12} gap={8} style={{ marginTop: 10 }}>
-              <Grid.Item span={5}>
-                <Button
-                  block
-                  shape="default"
-                  color="primary"
-                  onClick={toPrev}
-                  disabled={currentIndex === 0}
+            <div className="container">
+              {renderScale ? suspense(render()) : null}
+              <Grid columns={12} gap={8} style={{ marginTop: 10 }}>
+                <Grid.Item span={5}>
+                  <Button
+                    block
+                    shape="default"
+                    color="primary"
+                    onClick={toPrev}
+                    disabled={currentIndex === 0}
+                  >
+                    上一题
+                  </Button>
+                </Grid.Item>
+                <Grid.Item
+                  span={2}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
                 >
-                  上一题
-                </Button>
-              </Grid.Item>
-              <Grid.Item
-                span={2}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <span>{currentIndex + 1 + '/' + scale.questions.length}</span>
-              </Grid.Item>
-              <Grid.Item span={5}>
-                <Button
-                  block
-                  shape="default"
-                  color="primary"
-                  onClick={toNext}
-                  disabled={
-                    values[currentIndex] === undefined ||
-                    currentIndex === scale.questions.length - 1
-                  }
-                >
-                  下一题
-                </Button>
-              </Grid.Item>
-            </Grid>
+                  <span>{currentIndex + 1 + '/' + scale.questions.length}</span>
+                </Grid.Item>
+                <Grid.Item span={5}>
+                  <Button
+                    block
+                    shape="default"
+                    color="primary"
+                    onClick={toNext}
+                    disabled={
+                      values[currentIndex] === undefined ||
+                      currentIndex === scale.questions.length - 1
+                    }
+                  >
+                    下一题
+                  </Button>
+                </Grid.Item>
+              </Grid>
 
-            {values.length === scale.questions.length ? (
-              <Button
-                block
-                color="success"
-                className="submit"
-                onClick={onSubmit}
-              >
-                查看结果
-              </Button>
-            ) : null}
+              {values.length === scale.questions.length ? (
+                <Button
+                  block
+                  color="success"
+                  className="submit"
+                  onClick={onSubmit}
+                >
+                  查看结果
+                </Button>
+              ) : null}
+            </div>
           </>
         )}
       </div>
