@@ -8,7 +8,7 @@ interface IdeaProps {
 
 const Idea = ({ content, hide }: IdeaProps) => {
   return (
-    <div className="container">
+    <div>
       <div
         style={{
           textAlign: 'center',

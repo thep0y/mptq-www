@@ -24,30 +24,30 @@ const Result = () => {
 
   const render = () => {
     if (path === 'scl90') {
-      return suspense(<LazySCL90Result />)
+      return <LazySCL90Result />
     }
 
     if (path === '16pf') {
-      return suspense(<Lazy16pfResult />)
+      return <Lazy16pfResult />
     }
 
     if (path === 'y_bocs') {
-      return suspense(<LazyYbocsResult />)
+      return <LazyYbocsResult />
     }
 
     if (path === 'ept') {
-      return suspense(<LazyEPTResult />)
+      return <LazyEPTResult />
     }
 
     if (path === 'epq_rsc') {
-      return suspense(<LazyEpqRscResult />)
+      return <LazyEpqRscResult />
     }
 
     if (path === 'neo_pi_r') {
-      return suspense(<LazyNeoPiRResult />)
+      return <LazyNeoPiRResult />
     }
 
-    return suspense(<LazyCommonResult />)
+    return <LazyCommonResult />
   }
 
   return (
@@ -66,7 +66,7 @@ const Result = () => {
         content="您的测试结果本网站不会保存，如果需要保存请截图。"
       />
 
-      {render()}
+      {suspense(render())}
 
       {suspense(<LazyFooter />)}
     </div>

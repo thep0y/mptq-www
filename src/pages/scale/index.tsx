@@ -313,7 +313,7 @@ const Scale = () => {
         {scale.name}
       </NavBar>
 
-      <div style={{ flex: 1 }}>
+      <div className="container">
         {scale.idea ? (
           suspense(
             <LazyIdea
@@ -338,7 +338,7 @@ const Scale = () => {
               onClose={() => setRenderScale(true)}
               defaultShow={import.meta.env.MODE !== 'development'}
             />
-            <div className="container">
+            <div>
               {renderScale ? suspense(render()) : null}
               <Grid columns={12} gap={8} style={{ marginTop: 10 }}>
                 <Grid.Item span={5}>

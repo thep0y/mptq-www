@@ -72,7 +72,7 @@ const Result = () => {
     <>
       <div
         id="chart"
-        style={{ width: '100%', height: '20rem', position: 'relative' }}
+        style={{ width: '100%', height: '40rem', position: 'relative' }}
       >
         {/*
         <RadarChart
