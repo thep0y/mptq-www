@@ -2,6 +2,7 @@ import Canvas from '@antv/f2-react'
 import { Chart, Axis, Area, Point, Line } from '@antv/f2'
 import type { StyleProps } from '@antv/f2/es/components/axis/types'
 import type { ScaleOption } from '@antv/f2/es/controller/scale'
+import type { DataRecordScale, DataRecord } from '@antv/f2/es/chart/Data'
 import { Color } from '~/utils'
 import React from 'react'
 
@@ -48,7 +49,9 @@ const RadarChart = <T extends { [K: string]: number }>({
     points.push(<Point x="item" {...props} />)
   })
 
-  const scaleOpt = scaleOption && { [axisKey ?? dataKeys[0]]: scaleOption }
+  const scaleOpt =
+    scaleOption &&
+    ({ [axisKey ?? dataKeys[0]]: scaleOption } as DataRecordScale<DataRecord>)
 
   return (
     <Canvas pixelRatio={window.devicePixelRatio}>
