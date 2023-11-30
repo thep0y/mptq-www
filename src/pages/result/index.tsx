@@ -29,7 +29,7 @@ const Result = () => {
       <ErrorBlock
         fullPage
         status="empty"
-        title="结果页不可直访问"
+        title="结果页不可直接访问"
         description="还是先去测试吧"
       >
         <Button color="primary" onClick={toHome}>
