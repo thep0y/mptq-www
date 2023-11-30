@@ -1,5 +1,5 @@
-import { NavBar, NoticeBar } from 'antd-mobile'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
+import { NavBar, NoticeBar, ErrorBlock, Button } from 'antd-mobile'
 import { HomeOutlined } from '@ant-design/icons'
 import suspense from '~/advance/suspense'
 import {
@@ -21,6 +21,23 @@ const Result = () => {
   const { path } = useParams() as { path: Path }
   const location = useLocation()
   const navigate = useNavigate()
+
+  const toHome = () => navigate('/', { replace: true })
+
+  if (!location.state) {
+    return (
+      <ErrorBlock
+        fullPage
+        status="empty"
+        title="结果页不可直访问"
+        description="还是先去测试吧"
+      >
+        <Button color="primary" onClick={toHome}>
+          回到主页
+        </Button>
+      </ErrorBlock>
+    )
+  }
 
   const render = () => {
     if (path === 'scl90') {
@@ -52,10 +69,7 @@ const Result = () => {
 
   return (
     <div className="main">
-      <NavBar
-        backArrow={<HomeOutlined />}
-        onBack={() => navigate('/', { replace: true })}
-      >
+      <NavBar backArrow={<HomeOutlined />} onBack={toHome}>
         {location.state.name + '结果'}
       </NavBar>
 
