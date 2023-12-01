@@ -44,6 +44,12 @@ const Index = () => {
     getList()
   }, [])
 
+  useEffect(() => {
+    if (isPC()) {
+      Toast.show('本网站专为手机设计，在电脑浏览器中效果可能不好。')
+    }
+  }, [])
+
   if (error) {
     return <ErrorBlock fullPage status="disconnected" {...error} />
   }
@@ -56,17 +62,13 @@ const Index = () => {
     Toast.show('点击标题可进入测试')
   }
 
-  if (isPC()) {
-    Toast.show('本网站专为手机设计，在 PC 浏览器中效果可能不好。')
-  }
-
   return (
     <div style={{ position: 'relative' }}>
       <SafeArea position="top" />
 
       <List className="list">
         {list.map((v) =>
-          !v.disabled ? (
+          import.meta.env.MODE !== 'production' || !v.disabled ? (
             <List.Item key={v.path} className="list__item">
               <Card
                 title={v.name}
