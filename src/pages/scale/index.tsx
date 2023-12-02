@@ -1,7 +1,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { NavBar, Grid, Button, NoticeBar, ErrorBlock } from 'antd-mobile'
+import {
+  NavBar,
+  Grid,
+  Button,
+  NoticeBar,
+  ErrorBlock,
+  ProgressBar,
+} from 'antd-mobile'
 import suspense from '~/advance/suspense'
 import {
   Lazy16pfScale,
@@ -407,7 +414,12 @@ const Scale = () => {
                 >
                   查看结果
                 </Button>
-              ) : null}
+              ) : (
+                <ProgressBar
+                  percent={(currentIndex / scale.questions.length) * 100}
+                  style={{ marginTop: 12 }}
+                />
+              )}
             </div>
           </>
         )}
