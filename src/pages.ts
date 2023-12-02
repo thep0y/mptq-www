@@ -1,11 +1,12 @@
 import { lazy } from 'react'
+import type { QuestionType } from '~/pages/scale/components/question'
 
 export const LazyFooter = lazy(() => import('~/components/footer'))
 
 export const LazyHome = lazy(() => import('~/pages/list/index'))
 export const LazyQuestion = lazy(
   () => import('~/pages/scale/components/question'),
-)
+) as QuestionType
 export const LazyIdea = lazy(() => import('~/pages/scale/components/idea'))
 
 export const LazyCommonQuestion = lazy(
@@ -55,6 +56,13 @@ export const LazyNeoPiRScale = lazy(
   () => import('~/pages/scale/items/neo-pi-r/scale'),
 )
 
+export const LazyHSDSQuestion = lazy(
+  () => import('~/pages/scale/items/h-sds/question'),
+)
+export const LazyHSDSScale = lazy(
+  () => import('~/pages/scale/items/h-sds/scale'),
+)
+
 export const LazyScale = lazy(() => import('~/pages/scale/index'))
 
 export const LazyCircle = lazy(() => import('~/pages/result/components/circle'))
@@ -74,3 +82,4 @@ export const LazyEpqRscResult = lazy(
 export const LazyNeoPiRResult = lazy(
   () => import('~/pages/result/neo-pi-r/index'),
 )
+export const LazyHSDSResult = lazy(() => import('~/pages/result/h-sds/index'))

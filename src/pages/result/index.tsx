@@ -11,6 +11,7 @@ import {
   LazyEpqRscResult,
   LazyNeoPiRResult,
   LazyFooter,
+  LazyHSDSResult,
 } from '~/pages'
 import './index.scss'
 
@@ -64,19 +65,27 @@ const Result = () => {
       return <LazyNeoPiRResult />
     }
 
+    if (path === 'h_sds') {
+      return <LazyHSDSResult />
+    }
+
     return <LazyCommonResult />
   }
 
   return (
     <div className="main">
-      <NavBar backArrow={<HomeOutlined />} onBack={toHome}>
+      <NavBar
+        backArrow={<HomeOutlined />}
+        onBack={toHome}
+        className={path + '-result-nav'}
+      >
         {location.state.name + '结果'}
       </NavBar>
 
       <NoticeBar
         wrap
         color="info"
-        style={{ marginBottom: '1rem' }}
+        className={path + '-result-notice'}
         content="您的测试结果本网站不会保存，如果需要保存请截图。"
       />
 

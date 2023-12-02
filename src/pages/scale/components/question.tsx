@@ -3,17 +3,20 @@ import { CheckCircleFill } from 'antd-mobile-icons'
 import type { CheckListValue } from 'antd-mobile/es/components/check-list'
 import './index.scss'
 
-interface QuestionProps {
+type InferValueType<B extends boolean> = B extends true ? number[] : number
+
+interface QuestionProps<M extends boolean> {
   index: number
   title: string
-  selected?: number
-  handleChange: (v: number) => void
+  selected?: InferValueType<M>
+  handleChange: (v: InferValueType<M>) => void
   options: Option[]
   useIndex?: boolean
   prefix?: string[]
+  multiple?: boolean
 }
 
-const Question = ({
+const Question = <M extends boolean>({
   index,
   title,
   selected,
@@ -21,18 +24,23 @@ const Question = ({
   options,
   useIndex = true,
   prefix,
-}: QuestionProps) => {
+  multiple,
+}: QuestionProps<M>) => {
   const onChange = (val: CheckListValue[]) => {
-    // 禁止取消选择
-    if (val.length === 0) return
+    // 在单选时禁止空选择
+    if (!multiple && val.length === 0) return
 
-    const v = val[0]
+    if (!multiple) {
+      const v = val[0]
 
-    if (typeof v === 'string') {
-      throw Error(`不正确的类型：${v} -> string`)
+      if (typeof v !== 'number') {
+        throw Error(`不正确的类型：${v} -> string`)
+      }
+
+      handleChange(v as InferValueType<M>)
+    } else {
+      handleChange(val as InferValueType<M>)
     }
-
-    handleChange(v)
   }
 
   return (
@@ -43,9 +51,16 @@ const Question = ({
 
       <div>
         <CheckList
-          value={selected !== undefined ? [selected] : []}
+          value={
+            selected !== undefined
+              ? typeof selected === 'number'
+                ? [selected]
+                : selected
+              : []
+          }
           onChange={onChange}
           activeIcon={<CheckCircleFill />}
+          multiple={multiple}
         >
           {options.map((v, i) => (
             <CheckList.Item key={i} value={useIndex ? i : v.point}>
@@ -57,5 +72,7 @@ const Question = ({
     </div>
   )
 }
+
+export type QuestionType = typeof Question
 
 export default Question

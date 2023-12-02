@@ -9,6 +9,7 @@ import {
   LazyEPTScale,
   LazyEptRscScale,
   LazyFooter,
+  LazyHSDSScale,
   LazyIdea,
   LazyNeoPiRScale,
   LazySCL90Scale,
@@ -89,6 +90,9 @@ const Scale = () => {
   }, [currentIndex, scale, turnOnAutoNext, values])
 
   useEffect(() => {
+    // 有多选题的量表不自动切换下一题
+    if (path === 'h_sds') return
+
     if (
       autoNext &&
       values[currentIndex] !== undefined &&
@@ -129,9 +133,6 @@ const Scale = () => {
   const onSubmit = () => {
     const result = calculateResult!(values)
 
-    console.log(values)
-    console.log(result)
-
     switch (path) {
       case 'scl90':
       case '16pf':
@@ -139,6 +140,7 @@ const Scale = () => {
       case 'ept':
       case 'epq_rsc':
       case 'neo_pi_r':
+      case 'h_sds':
         navigate('/result/' + path, {
           replace: true,
           state: {
@@ -265,6 +267,24 @@ const Scale = () => {
       case 'neo_pi_r':
         return (
           <LazyNeoPiRScale
+            scale={
+              scale as Scale<
+                InferQuestion<typeof path>,
+                InferInterpretation<typeof path>
+              >
+            }
+            currentIndex={currentIndex}
+            values={values as InferValue<typeof path>[]}
+            setValues={setValues as SetStateAction<InferValue<typeof path>[]>}
+            setCalculateResult={
+              setCalculateResult as SetStateAction<CalculateResult<typeof path>>
+            }
+          />
+        )
+
+      case 'h_sds':
+        return (
+          <LazyHSDSScale
             scale={
               scale as Scale<
                 InferQuestion<typeof path>,

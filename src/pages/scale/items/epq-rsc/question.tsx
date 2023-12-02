@@ -29,7 +29,7 @@ const EqpRscQuestion = ({
   }
 
   return suspense(
-    <LazyQuestion
+    <LazyQuestion<false>
       index={index}
       title={title}
       selected={selected}

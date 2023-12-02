@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import suspense from "~/advance/suspense";
-import { LazyQuestion } from "~/pages";
+import { useState, useEffect } from 'react'
+import suspense from '~/advance/suspense'
+import { LazyQuestion } from '~/pages'
 
 interface QuestionProps extends EptQuestion {
-  value?: EptValue;
-  updateValues: (index: number, value: EptValue) => void;
-  index: number;
+  value?: EptValue
+  updateValues: (index: number, value: EptValue) => void
+  index: number
 }
 
 const EptQuestion = ({
@@ -16,20 +16,20 @@ const EptQuestion = ({
   value,
   updateValues,
 }: QuestionProps) => {
-  const [selected, setSelected] = useState<number | undefined>(value?.point);
+  const [selected, setSelected] = useState<number | undefined>(value?.point)
 
   useEffect(() => {
-    setSelected(value?.point);
-  }, [index, title, value]);
+    setSelected(value?.point)
+  }, [index, title, value])
 
   const handleChange = (v: number) => {
-    setSelected(v);
+    setSelected(v)
 
-    updateValues(index, { type, point: v });
-  };
+    updateValues(index, { type, point: v })
+  }
 
   return suspense(
-    <LazyQuestion
+    <LazyQuestion<false>
       index={index}
       title={title}
       selected={selected}
@@ -37,7 +37,7 @@ const EptQuestion = ({
       options={options}
       useIndex={false}
     />,
-  );
-};
+  )
+}
 
-export default EptQuestion;
+export default EptQuestion

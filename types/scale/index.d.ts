@@ -18,6 +18,7 @@ type Path =
   | 'ept'
   | '16pf'
   | 'neo_pi_r'
+  | 'h_sds'
 
 type ValueTypes = {
   scl90: Scl90Value
@@ -34,6 +35,8 @@ type InferValue<P extends Path> = P extends 'scl90'
   ? EpqRscValue
   : P extends 'neo_pi_r'
   ? NEOPiRValue
+  : P extends 'h_sds'
+  ? HSDSValue
   : number
 
 type InferResult<P extends Path> = P extends 'scl90'
@@ -48,6 +51,8 @@ type InferResult<P extends Path> = P extends 'scl90'
   ? SPFResult
   : P extends 'neo_pi_r'
   ? NEOPiRResult
+  : P extends 'h_sds'
+  ? HSDSResult
   : number
 
 type InferInterpretation<P extends Path> = P extends 'scl90'
@@ -60,6 +65,8 @@ type InferInterpretation<P extends Path> = P extends 'scl90'
   ? SPFInterpretation
   : P extends 'neo_pi_r'
   ? NEOPiRInterpretation
+  : P extends 'h_sds'
+  ? HSDSInterpretation
   : CommonInterpretation
 
 type InferQuestion<P extends Path> = P extends 'scl90'
@@ -72,6 +79,8 @@ type InferQuestion<P extends Path> = P extends 'scl90'
   ? SPFQuestion
   : P extends 'neo_pi_r'
   ? NEOPiRQuestion
+  : P extends 'h_sds'
+  ? HSDSQuestion
   : CommonQuestion
 
 type CalculateResult<P extends Path> = (
