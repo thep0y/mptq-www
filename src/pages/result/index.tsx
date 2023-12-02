@@ -93,7 +93,10 @@ const Result = () => {
 
       {suspense(<LazyFooter />)}
 
-      <WaterMark content="知己心理" fontColor="rgba(0, 0, 0, .1)" />
+      <WaterMark
+        content={['知己心理', 'https://scale.thepoy.cc']}
+        fontColor="rgba(0, 0, 0, .05)"
+      />
     </div>
   )
 }
