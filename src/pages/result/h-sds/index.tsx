@@ -127,16 +127,21 @@ const Result = () => {
       <Divider>职业兴趣解读</Divider>
 
       {top3Careers?.map((item) => (
-        <Card key={item.capacity_category} style={{ marginTop: 12 }}>
-          <Badge
-            content={item.score}
-            color="#108ee9"
-            style={{ right: '-10px', top: '5px' }}
-          >
-            <div style={{ fontWeight: 'bold', marginBottom: '10px' }}>
-              {item.name}({item.capacity_category})
-            </div>
-          </Badge>
+        <Card
+          key={item.capacity_category}
+          style={{ marginTop: 12 }}
+          title={
+            <Badge
+              content={item.score}
+              color="#108ee9"
+              style={{ right: '-10px', top: '5px' }}
+            >
+              <div style={{ fontWeight: 'bold' }}>
+                {item.name}({item.capacity_category})
+              </div>
+            </Badge>
+          }
+        >
           <div className="indent">
             <span className="emphasize">【人格特征】</span>
             {item.personality_trait}
