@@ -1,9 +1,18 @@
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Button, Collapse, Divider, NoticeBar, Popup } from 'antd-mobile'
+import {
+  Button,
+  Collapse,
+  Divider,
+  NoticeBar,
+  Popup,
+  ResultPage,
+  Card,
+} from 'antd-mobile'
 import GradientLine from '../components/gradient-line'
 import Radar from '../components/radar.tsx'
 import { generateLinearColors, Color } from '~/utils'
+import './index.scss'
 
 interface SubdimensionInterpretationProps {
   close: () => void
@@ -69,27 +78,15 @@ const Result = () => {
   const closeSub = () => setSubProps([])
 
   return (
-    <>
-      <div
-        id="chart"
-        style={{ width: '100%', height: '40rem', position: 'relative' }}
-      >
-        {/*
-        <RadarChart
-          min={1}
-          max={10}
-          data={interpretation.dimensions.map((d) => ({
-            item: d.name,
-            value: result.dimensions[d.dimension].transformRule.value,
-          }))}
-          tickCount={6}
-          nice={false}
-        />
-        */}
-
+    <ResultPage
+      status="success"
+      title="大五人格测试结果"
+      style={{ flex: 1, minHeight: 'inherit' }}
+    >
+      <ResultPage.Card style={{ height: '20rem', marginTop: 12 }}>
         <Radar
           data={interpretation.dimensions.map((d) => ({
-            item: d.name,
+            item: d.name.includes('/') ? d.name.split('/')[0] : d.name,
             fields: {
               value: result.dimensions[d.dimension].transformRule.value,
             },
@@ -100,46 +97,49 @@ const Result = () => {
           scaleOption={{
             min: 1,
             max: 10,
-            tickCount: 6,
+            nice: false,
+            tickCount: 4,
           }}
         />
-      </div>
+      </ResultPage.Card>
 
       <div className="container">
         <NoticeBar
           wrap
           color="alert"
           content="不同的颜色不代表好坏程度，只是为了告诉您您的得分倾向于哪一侧。"
+          style={{ borderRadius: 10 }}
         />
 
-        <Collapse>
-          {interpretation.dimensions.map((d) => {
-            const resultItem = result.dimensions[d.dimension]
+        {interpretation.dimensions.map((d) => {
+          const resultItem = result.dimensions[d.dimension]
 
-            return (
-              <Collapse.Panel
-                key={d.dimension}
-                title={d.name + '(' + d.dimension + ')'}
-              >
-                <div className="indent" style={{ marginBottom: '1rem' }}>
-                  {d.description}
-                </div>
+          return (
+            <Card
+              key={d.dimension}
+              style={{ marginTop: 12 }}
+              title={d.name + '(' + d.dimension + ')'}
+            >
+              <div className="indent" style={{ marginBottom: '1rem' }}>
+                {d.description}
+              </div>
 
-                <Divider>得分</Divider>
+              <Divider>得分</Divider>
 
-                <GradientLine
-                  min={1}
-                  max={10}
-                  value={resultItem.transformRule.value}
-                  lowText={d.low}
-                  highText={d.high}
-                  colors={generateLinearColors(
-                    new Color(0, 100, 50),
-                    new Color(120, 100, 50),
-                    3,
-                  )}
-                />
+              <GradientLine
+                min={1}
+                max={10}
+                value={resultItem.transformRule.value}
+                lowText={d.low}
+                highText={d.high}
+                colors={generateLinearColors(
+                  new Color(0, 100, 50),
+                  new Color(120, 100, 50),
+                  3,
+                )}
+              />
 
+              <div style={{ height: 30 }}>
                 <Button
                   onClick={() => setSubProps(d.subdimension_interpretations)}
                   size="small"
@@ -149,10 +149,10 @@ const Result = () => {
                 >
                   查看子维度
                 </Button>
-              </Collapse.Panel>
-            )
-          })}
-        </Collapse>
+              </div>
+            </Card>
+          )
+        })}
 
         <SubdimensionInterpretation
           close={closeSub}
@@ -160,7 +160,7 @@ const Result = () => {
           subdimensionResult={result.subdimensions}
         />
       </div>
-    </>
+    </ResultPage>
   )
 }
 

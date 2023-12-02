@@ -1,5 +1,5 @@
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
-import { NavBar, NoticeBar, ErrorBlock, Button } from 'antd-mobile'
+import { NavBar, NoticeBar, ErrorBlock, Button, WaterMark } from 'antd-mobile'
 import { HomeOutlined } from '@ant-design/icons'
 import suspense from '~/advance/suspense'
 import {
@@ -92,6 +92,8 @@ const Result = () => {
       {suspense(render())}
 
       {suspense(<LazyFooter />)}
+
+      <WaterMark content="知己心理" fontColor="rgba(0, 0, 0, .1)" />
     </div>
   )
 }

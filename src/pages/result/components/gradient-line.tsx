@@ -36,16 +36,16 @@ const GradientLine = ({
     colors[0].lightness,
   )
 
-  const [detail, setDetail] = useState<{ text: string; key: string }>(
+  const [detail, setDetail] = useState<{ text: string; key: '高' | '低' }>(
     markerPosition < 50
       ? {
-          text: lowText,
-          key: '低',
-        }
+        text: lowText,
+        key: '低',
+      }
       : {
-          text: highText,
-          key: '高',
-        },
+        text: highText,
+        key: '高',
+      },
   )
 
   return (
@@ -55,6 +55,7 @@ const GradientLine = ({
         <div className="left-text">
           <Button
             onClick={() => setDetail({ text: lowText, key: '低' })}
+            disabled={detail.key === '低'}
             size="small"
           >
             低
@@ -75,6 +76,7 @@ const GradientLine = ({
         <div className="right-text">
           <Button
             onClick={() => setDetail({ text: highText, key: '高' })}
+            disabled={detail.key === '高'}
             size="small"
           >
             高
