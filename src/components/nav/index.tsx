@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { NavBar, Button, Modal, ImageViewer, Space, Image } from 'antd-mobile'
+import type { ButtonProps } from 'antd-mobile'
 import Alipay from '~/assets/alipay.webp'
 import Wechat from '~/assets/wechat.webp'
 import './index.scss'
@@ -11,6 +12,7 @@ interface NavProps {
   showDonateOnLoad?: boolean
   onBack?: () => void
   className?: string
+  buttonFill: ButtonProps['fill']
 }
 
 const Nav = ({
@@ -19,6 +21,7 @@ const Nav = ({
   showDonateOnLoad = false,
   onBack,
   className,
+  buttonFill = 'none',
 }: NavProps) => {
   const [showDonateState, setShowDonateState] = useState(showDonateOnLoad)
   const [imageViewer, setImageViewer] = useState<string | null>(null)
@@ -30,7 +33,10 @@ const Nav = ({
       content: (
         <div id="donate">
           <div className="indent" style={{ marginBottom: 12 }}>
-            如果此次测试对您有帮助，请考虑捐赠一定的金额用于本网站的开发和维护。捐赠全凭个人意愿，不捐赠您也可以使用。
+            <div style={{ marginBottom: 10 }}>
+              如果此次测试对您有帮助，请考虑捐赠一定的金额用于本网站的开发和维护。捐赠全凭个人意愿，不捐赠您也可以使用。
+            </div>
+            <div>关闭此窗口后您可以点击网页右上角的“捐款”按钮重新打开。</div>
           </div>
           <Space align="center" justify="center">
             <Image
@@ -61,7 +67,7 @@ const Nav = ({
         right={
           <Button
             color="primary"
-            fill="none"
+            fill={buttonFill}
             size="mini"
             onClick={() => setShowDonateState(true)}
           >

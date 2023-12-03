@@ -81,6 +81,7 @@ const Result = () => {
         onBack={toHome}
         className={path + '-result-nav'}
         showDonateOnLoad
+        buttonFill={['neo_pi_r', 'h_sds'].includes(path) ? 'solid' : 'none'}
       />
 
       <NoticeBar
