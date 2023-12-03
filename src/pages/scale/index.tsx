@@ -1,14 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import {
-  NavBar,
-  Grid,
-  Button,
-  NoticeBar,
-  ErrorBlock,
-  ProgressBar,
-} from 'antd-mobile'
+import { Grid, Button, NoticeBar, ErrorBlock, ProgressBar } from 'antd-mobile'
 import suspense from '~/advance/suspense'
 import {
   Lazy16pfScale,
@@ -25,6 +18,7 @@ import {
 import { api } from '~/utils'
 import './index.scss'
 import Alert from '~/components/alert'
+import Nav from '~/components/nav'
 
 const Scale = () => {
   const { path } = useParams() as { path: Path }
@@ -336,9 +330,11 @@ const Scale = () => {
         height: '100vh',
       }}
     >
-      <NavBar onBack={() => navigate('/', { replace: true })}>
-        {scale.name}
-      </NavBar>
+      <Nav
+        title={scale.name}
+        onBack={() => navigate('/', { replace: true })}
+        backArrow
+      />
 
       <div className="container">
         {scale.idea ? (

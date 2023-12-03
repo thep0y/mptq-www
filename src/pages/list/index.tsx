@@ -15,6 +15,7 @@ import { api, isPC } from '~/utils'
 import suspense from '~/advance/suspense'
 import { LazyFooter } from '~/pages'
 import './index.scss'
+import Nav from '~/components/nav'
 
 const tagNames: Record<keyof Tag, string> = {
   info: 'primary',
@@ -65,6 +66,8 @@ const Index = () => {
   return (
     <div style={{ position: 'relative' }}>
       <SafeArea position="top" />
+
+      <Nav title="首页" />
 
       <List className="list">
         {list.map((v) =>

@@ -1,5 +1,5 @@
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
-import { NavBar, NoticeBar, ErrorBlock, Button, WaterMark } from 'antd-mobile'
+import { NoticeBar, ErrorBlock, Button, WaterMark } from 'antd-mobile'
 import { HomeOutlined } from '@ant-design/icons'
 import suspense from '~/advance/suspense'
 import {
@@ -14,6 +14,7 @@ import {
   LazyHSDSResult,
 } from '~/pages'
 import './index.scss'
+import Nav from '~/components/nav'
 
 export const WARNING =
   '本测试结果仅供参考，不提供医疗建议，如果你确实感到不适可参考本结果去精神专科医院咨询心理医生。'
@@ -74,13 +75,13 @@ const Result = () => {
 
   return (
     <div className="main">
-      <NavBar
+      <Nav
+        title={location.state.name + '结果'}
         backArrow={<HomeOutlined />}
         onBack={toHome}
         className={path + '-result-nav'}
-      >
-        {location.state.name + '结果'}
-      </NavBar>
+        showDonateOnLoad
+      />
 
       <NoticeBar
         wrap
