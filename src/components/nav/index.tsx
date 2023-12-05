@@ -12,7 +12,7 @@ interface NavProps {
   showDonateOnLoad?: boolean
   onBack?: () => void
   className?: string
-  buttonFill: ButtonProps['fill']
+  buttonFill?: ButtonProps['fill']
 }
 
 const Nav = ({
