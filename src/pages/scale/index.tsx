@@ -367,7 +367,7 @@ const Scale = () => {
                 <Grid.Item span={5}>
                   <Button
                     block
-                    shape="default"
+                    shape="rounded"
                     color="primary"
                     onClick={toPrev}
                     disabled={currentIndex === 0}
@@ -388,8 +388,8 @@ const Scale = () => {
                 <Grid.Item span={5}>
                   <Button
                     block
-                    shape="default"
                     color="primary"
+                    shape="rounded"
                     onClick={toNext}
                     disabled={
                       values[currentIndex] === undefined ||
@@ -404,7 +404,7 @@ const Scale = () => {
               {values.length === scale.questions.length ? (
                 <Button
                   block
-                  color="success"
+                  color="primary"
                   className="submit"
                   onClick={onSubmit}
                 >
