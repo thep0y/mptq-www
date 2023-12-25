@@ -1,6 +1,4 @@
-import { CheckList } from 'antd-mobile'
-import { CheckCircleFill } from 'antd-mobile-icons'
-import type { CheckListValue } from 'antd-mobile/es/components/check-list'
+import Checklist from './checklist'
 import './index.scss'
 
 type InferValueType<B extends boolean> = B extends true ? number[] : number
@@ -14,6 +12,7 @@ interface QuestionProps<M extends boolean> {
   useIndex?: boolean
   prefix?: string[]
   multiple?: boolean
+  textCentered?: boolean
 }
 
 const Question = <M extends boolean>({
@@ -25,8 +24,9 @@ const Question = <M extends boolean>({
   useIndex = true,
   prefix,
   multiple,
+  textCentered,
 }: QuestionProps<M>) => {
-  const onChange = (val: CheckListValue[]) => {
+  const onChange = (val: number[]) => {
     // 在单选时禁止空选择
     if (!multiple && val.length === 0) return
 
@@ -50,24 +50,21 @@ const Question = <M extends boolean>({
       </div>
 
       <div>
-        <CheckList
+        <Checklist
+          radio={!multiple}
           value={
-            selected !== undefined
-              ? typeof selected === 'number'
+            selected === undefined
+              ? []
+              : typeof selected === 'number'
                 ? [selected]
                 : selected
-              : []
           }
+          prefix={prefix}
+          options={options}
+          useIndex={useIndex}
           onChange={onChange}
-          activeIcon={<CheckCircleFill />}
-          multiple={multiple}
-        >
-          {options.map((v, i) => (
-            <CheckList.Item key={i} value={useIndex ? i : v.point}>
-              {(prefix ? prefix[i] + '. ' : '') + v.text}
-            </CheckList.Item>
-          ))}
-        </CheckList>
+          textCentered={textCentered}
+        />
       </div>
     </div>
   )

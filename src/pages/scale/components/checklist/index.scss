@@ -1,0 +1,27 @@
+.check-list {
+  --inactive-color: #f6f6f6;
+  --height: 32px;
+
+  .checkbox {
+    background-color: var(--inactive-color);
+    border: 1px solid var(--inactive-color);
+    border-radius: calc(var(--height) / 2);
+    padding: 0 10px;
+    height: var(--height);
+    line-height: var(--height);
+
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+  }
+
+  .active {
+    background-color: #e7f1ff;
+    color: var(--adm-color-primary);
+    border: 1px solid var(--adm-color-primary);
+  }
+
+  .center {
+    text-align: center;
+  }
+}

@@ -61,6 +61,7 @@ const Scl90Question = ({
       handleChange={handleChange}
       options={options}
       multiple={question_type !== 'CAPACITY_CATEGORY'}
+      textCentered={question_type === 'CAPACITY_CATEGORY'}
     />,
   )
 }
