@@ -92,7 +92,16 @@ const Scale = () => {
 
   useEffect(() => {
     // 有多选题的量表不自动切换下一题
-    if (path === 'h_sds') return
+    if (
+      path === 'h_sds' &&
+      (
+        scale as Scale<
+          InferQuestion<typeof path>,
+          InferInterpretation<typeof path>
+        >
+      )?.questions[currentIndex].question_type !== 'CAPACITY_CATEGORY'
+    )
+      return
 
     if (
       autoNext &&
