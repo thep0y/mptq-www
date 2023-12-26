@@ -1,5 +1,16 @@
 .check-list {
-  --inactive-color: #f6f6f6;
+  @media (prefers-color-scheme: dark) {
+    --background-color: #000;
+    --inactive-color: #444;
+    --text-color: #919191;
+  }
+
+  @media (prefers-color-scheme: light) {
+    --background-color: #e7f1ff;
+    --inactive-color: #f6f6f6;
+    --text-color: var(--adm-color-text);
+  }
+
   --height: 32px;
 
   .checkbox {
@@ -9,6 +20,7 @@
     padding: 5px 10px;
     display: flex;
     align-items: center;
+    color: var(--text-color);
 
     &:not(:first-child) {
       margin-top: 5px;
@@ -16,7 +28,7 @@
   }
 
   .active {
-    background-color: #e7f1ff;
+    background-color: var(--background-color);
     color: var(--adm-color-primary);
     border: 1px solid var(--adm-color-primary);
   }

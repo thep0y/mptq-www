@@ -31,6 +31,9 @@ const router = createBrowserRouter([
   },
 ])
 
+window.matchMedia('(prefers-color-scheme: dark)').matches &&
+  document.documentElement.setAttribute('data-prefers-color-scheme', 'dark')
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RouterProvider router={router} />

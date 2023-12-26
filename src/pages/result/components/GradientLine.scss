@@ -23,8 +23,10 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #ff0000; /* 设置标记颜色，可以根据需要调整 */
-  border: 2px solid #fff; /* 设置标记边框颜色，可以根据需要调整 */
+  background-color: #ff0000;
+  /* 设置标记颜色，可以根据需要调整 */
+  border: 2px solid var(--adm-color-box);
+  /* 设置标记边框颜色，可以根据需要调整 */
 }
 
 .detail {
@@ -33,6 +35,6 @@
   .title {
     font-weight: bold;
     font-size: 14px;
-    color: #000;
+    color: var(--adm-color-text);
   }
 }

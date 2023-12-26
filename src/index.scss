@@ -1,9 +1,21 @@
 :root {
-  --background-color: #f7f8fa;
+  --background-color: var(--adm-color-box, #f7f8fa);
   --adm-mask-z-index: 1100;
   --adm-popup-z-index: 1100;
 
   background-color: var(--background-color);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --shadow-color: rgb(237, 238, 241);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --shadow-color: #000;
+  }
 }
 
 body {
@@ -18,7 +30,7 @@ body {
 }
 
 .adm-nav-bar {
-  background-color: #fff;
+  background-color: var(--adm-color-box);
 }
 
 .container {
@@ -45,9 +57,9 @@ body {
 // 强调字体，加粗、黑色
 .emphasize {
   font-weight: bold;
-  color: #000;
+  color: var(--adm-color-text);
 }
 
 .adm-card {
-  box-shadow: 0px 1px 7px 0px rgb(237, 238, 241);
+  box-shadow: 0px 1px 7px 0px var(--shadow-color);
 }
