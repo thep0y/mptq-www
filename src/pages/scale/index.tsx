@@ -143,6 +143,8 @@ const Scale = () => {
   const onSubmit = () => {
     const result = calculateResult!(values)
 
+    api('/statistics?scale=' + path)
+
     switch (path) {
       case 'scl90':
       case '16pf':
