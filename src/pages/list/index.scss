@@ -20,5 +20,16 @@
     .adm-notice-bar {
       font-size: 0.8rem;
     }
+
+    &-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      &-statistics-times {
+        font-size: 0.8rem;
+        color: var(--adm-color-weak);
+      }
+    }
   }
 }

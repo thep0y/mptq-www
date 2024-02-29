@@ -4,3 +4,8 @@ interface HttpError {
   title: string
   description: string
 }
+
+interface Statistics {
+  name: string
+  times: number
+}

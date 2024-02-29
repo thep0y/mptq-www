@@ -29,6 +29,7 @@ const Index = () => {
 
   const [error, setError] = useState<HttpError | null>(null)
   const [list, setList] = useState<ListItem[]>([])
+  const [statistics, setStatistics] = useState<Statistics[]>([])
 
   useEffect(() => {
     const getList = async () => {
@@ -42,7 +43,18 @@ const Index = () => {
       setList(data)
     }
 
-    getList()
+    const getStatistics = async () => {
+      const data = await api<Statistics[]>('/get_statistics')
+
+      if (data instanceof Error) {
+        setError({ title: '响应异常', description: String(data) })
+        return
+      }
+
+      setStatistics(data)
+    }
+
+    Promise.all([getList(), getStatistics()])
   }, [])
 
   useEffect(() => {
@@ -91,17 +103,23 @@ const Index = () => {
                   collapseText="收起"
                   onContentClick={onContentClick}
                 />
-                <div className="tags">
-                  {Object.keys(v.tags).map(
-                    (k) =>
-                      (v.tags[k as keyof Tag] as string[] | undefined)?.map(
-                        (s, i) => (
-                          <Tag key={i} round color={tagNames[k as keyof Tag]}>
-                            {s}
-                          </Tag>
+                <div className="list__item-footer">
+                  <div className="tags">
+                    {Object.keys(v.tags).map(
+                      (k) =>
+                        (v.tags[k as keyof Tag] as string[] | undefined)?.map(
+                          (s, i) => (
+                            <Tag key={i} round color={tagNames[k as keyof Tag]}>
+                              {s}
+                            </Tag>
+                          ),
                         ),
-                      ),
-                  )}
+                    )}
+                  </div>
+                  <span className="list__item-footer-statistics-times">
+                    测试次数：
+                    {statistics.find((item) => (item.name = v.name))?.times}
+                  </span>
                 </div>
               </Card>
             </List.Item>
