@@ -118,7 +118,7 @@ const Index = () => {
                   </div>
                   <span className="list__item-footer-statistics-times">
                     测试次数：
-                    {statistics.find((item) => (item.name = v.name))?.times}
+                    {statistics.find((item) => item.name === v.name)?.times}
                   </span>
                 </div>
               </Card>
