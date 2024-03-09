@@ -143,7 +143,7 @@ const Scale = () => {
   const onSubmit = () => {
     const result = calculateResult!(values)
 
-    api('/statistics?scale=' + path)
+    api('/statistics?scale=' + path + '&clientType=2')
 
     switch (path) {
       case 'scl90':
