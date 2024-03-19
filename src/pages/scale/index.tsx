@@ -37,7 +37,7 @@ const Scale = () => {
   const [instruction, setInstruction] = useState<ReactNode[]>([
     <NoticeBar
       color="alert"
-      content="您的测试结果本小程序不会保存，请一定根据自己的实际情况回答，否则测试结果不具有参考性。"
+      content="您的测试结果本网站不会保存，请一定根据自己的实际情况回答，否则测试结果不具有参考性。"
     />,
   ])
 
