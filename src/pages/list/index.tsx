@@ -79,7 +79,7 @@ const Index = () => {
     <div style={{ position: 'relative' }}>
       <SafeArea position="top" />
 
-      <Nav title="首页" />
+      <Nav title="首页" showWeAppCodeOnLoad />
 
       <List className="list">
         {list.map((v) =>
