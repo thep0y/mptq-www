@@ -1,30 +1,33 @@
-# React + TypeScript + Vite
+# 知己心理网站页面
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+使用 antd-mobile 写的心理测试网站。
 
-Currently, two official plugins are available:
+## 1 部署
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+你可以将前端页面部署到自己的服务器上，**不建议修改捐款二维码和小程码，但如果你修改了也请提个 issue 让我知道**，这个要求不是强制性的。
 
-## Expanding the ESLint configuration
+我使用的包管理器是`pnpm`，如果你使用的不是此包管理器，使用自己的包管理器执行下面的命令。
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 1.1 安装依赖
 
-- Configure the top-level `parserOptions` property like this:
+前端那一套流程，不再多说，直接上命令：
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+pnpm i
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 1.2 打包
+
+```bash
+pnpm build
+```
+
+打包产物在项目根目录的`dist`目录中，根据自己的实际需求将产物上传。
+
+## 2 开发
+
+本网站是开源公益网站，但我个人精力有限，没有足够的时间去搜集已有测试或量表外的其他量表相关资料，如果你想提供某个量表的**完整题目**、**有可信来源的常模**、**计分规则**、**参考论文或书籍**可通过 issue 提供，以上条件缺一不可。
+
+这其实是后端的内容，但后端代码尚未开源，暂时可在本项目中提供。
+
+一些功能性更新或 bug 修复直接创建 PR 即可。
